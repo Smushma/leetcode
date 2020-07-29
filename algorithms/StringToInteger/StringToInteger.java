@@ -14,18 +14,21 @@ class Solution {
             position++;
         }
         
-        String accumulator = "";
-        while (position < str.length() && str.charAt(position) != ' ') {
+        while (position < str.length() && Character.isDigit(str.charAt(position))) {
             
-            if (Character.isDigit(str.charAt(position))) {
-                accumulator += Character.toString(str.charAt(position));
-                System.out.println(accumulator);
-            }
-            
-            result = (int)Long.parseLong(accumulator);
-            break;
+			result *= 10 + (str.charAt(position) - '0');
+				
+            if (isPositive && result > Integer.MAX_VALUE)
+				return Integer.MAX_VALUE;
+			else if (!positive && num > Integer.MAX_VALUE)
+				return Integer.MIN_VALUE;
+			
+			position++;
         }
         
+		if (!positive)
+			num *= -1;
+		
         return (int)result;
     }
 }
